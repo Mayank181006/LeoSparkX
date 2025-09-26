@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Dark variant (optional) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Smooth theme transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.text-stroke-2 {
+  -webkit-text-stroke: 0.8px black;
+}
+
+.trace{
+  visibility: hidden;
+}
