@@ -1,13 +1,18 @@
-// services/timerService.js
-const Timer = require("../models/Timer");
+const Timer = require('../models/Timer');
 
-exports.calculateDuration = (startTime, endTime) => {
-  if (!startTime || !endTime) return 0;
-  return Math.round((endTime - startTime) / 60000); // duration in minutes
+exports.create = async (userId, data) => {
+  const timer = new Timer({ ...data, user: userId });
+  return await timer.save();
 };
 
-// Optional: get total focus time for a user
-exports.getTotalFocusTime = async (userId) => {
-  const timers = await Timer.find({ user: userId, status: "completed" });
-  return timers.reduce((acc, t) => acc + (t.duration || 0), 0);
+exports.getAll = async (userId) => {
+  return await Timer.find({ user: userId });
+};
+
+exports.update = async (timerId, data) => {
+  return await Timer.findByIdAndUpdate(timerId, data, { new: true });
+};
+
+exports.remove = async (timerId) => {
+  return await Timer.findByIdAndDelete(timerId);
 };
